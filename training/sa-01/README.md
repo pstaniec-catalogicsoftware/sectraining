@@ -42,7 +42,7 @@ The local review player carries the answer key for convenient review and local s
 
 ## Recorded voices
 
-Use **Listen to this scene** to start playback, then pause, resume, or stop. The 18 local MP3 clips contain about 2 minutes 40 seconds of speech; learner reading and practice fill the remaining core budget. Each scene waits for the learner to continue.
+Audio is enabled by default and starts on opening the lesson and continuing between scenes. If browser autoplay rules require a click, select **Listen to this scene** once. Pause, resume, and stop remain available; stopping audio also turns off automatic narration for the rest of that page session. Assessment remains silent. The 18 local MP3 clips contain about 2 minutes 40 seconds of speech; learner reading and practice fill the remaining core budget. Each scene waits for the learner to continue.
 
 `media/voice/manifest.json` records the cast, exact spoken text, duration, provider model, and generation IDs. The player sequences these files without contacting ElevenLabs or exposing an API key. A changed or missing line disables that scene’s recording until refreshed, leaving the readable lesson available.
 

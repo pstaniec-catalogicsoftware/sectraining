@@ -61,3 +61,9 @@ The focused follow-up review confirmed the fix and found no remaining important 
 Browser checks in the in-app preview confirmed Claire’s narrator status, the automatic transition to Alex/Mark and Morgan/Katie, the matching speaker highlight, and pause/resume during Alex’s line. The conversation returned to idle when finished. A preview screenshot is saved as `preview-voice.png`. These checks establish playback controls and sequencing, not editorial approval of pronunciation or performance.
 
 Fixed narration and dialogue use recordings. Configured company instructions, feedback, emails and assessment remain readable text, replacing the earlier all-screen browser speech behaviour. Production accessibility review must cover this distinction.
+
+## Audio enabled by default
+
+The player now attempts narration on load, including resumed scenes, and keeps automatic narration enabled between scenes. Restart and company-profile resets also start narration when audio is enabled. Stop disables subsequent automatic narration for the current page session; assessment stays silent.
+
+Browser verification confirmed the autoplay attempt on reload, a usable Listen control after the preview browser rejected playback, successful playback after that click, and automatic narration after continuing from approved sharing to recap. Screenshot: `preview-audio-default.png`. All 27 existing automated checks pass. Browser restrictions may require the first click before sound is allowed.

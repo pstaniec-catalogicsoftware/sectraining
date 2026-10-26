@@ -6,7 +6,7 @@ const $=selector=>document.querySelector(selector);
 const el=(tag,className,text)=>{const item=document.createElement(tag);if(className)item.className=className;if(text!==undefined)item.textContent=text;return item;};
 const append=(parent,...items)=>{parent.append(...items);return parent;};
 const PROFILE_KEY='catalogic-sa01-review-profile';
-let lesson,profile,state,sessionKey,sourceProfileVersion,audioManifest,voiceEnabled=false,retrying=false,currentAudioClip=null;
+let lesson,profile,state,sessionKey,sourceProfileVersion,audioManifest,voiceEnabled=true,retrying=false,currentAudioClip=null;
 let notice='';
 const storage={get(key){try{return JSON.parse(localStorage.getItem(key));}catch{return null;}},set(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true;}catch{return false;}}};
 const text=value=>renderText(value,profile);
@@ -19,7 +19,7 @@ const narrator=createRecordedNarrator(path=>new Audio(path),status=>{
  const role=currentAudioClip?.role==='narrator'?'Narrator':currentAudioClip?.role;
  const voice=currentAudioClip?.voiceName?.split(' - ')[0];
  document.querySelectorAll('.speech-card.speaking').forEach(card=>card.classList.toggle('audio-paused',status==='paused'));
- $('#audio-status').textContent=status==='unavailable'?'This recording needs an update. You can read the scene on screen.':status==='error'?'Audio could not play. Try again, or read the scene on screen.':active?`${role??'Narrator'}${voice?' · '+voice:''} · ElevenLabs${status==='loading'?' · Loading…':status==='paused'?' · Paused':''}`:'';
+ $('#audio-status').textContent=status==='unavailable'?'This recording needs an update. You can read the scene on screen.':status==='blocked'?'Your browser needs a click to start audio. Select Listen to this scene.':status==='error'?'Audio could not start. Select Listen to this scene to try again, or read along.':active?`${role??'Narrator'}${voice?' · '+voice:''} · ElevenLabs${status==='loading'?' · Loading…':status==='paused'?' · Paused':''}`:'';
 },clip=>{currentAudioClip=clip;highlightSpeaker(clip);});
 function stopSpeech(){narrator.stop();}
 function playCurrentScene(){void narrator.play(buildAudioQueue(currentNode(),audioManifest));}
@@ -99,15 +99,6 @@ function renderAssessment(root){
  const err=el('p','error');err.setAttribute('role','alert');const button=el('button','primary','Submit answers');button.type='submit';append(form,err,button);
  form.addEventListener('submit',event=>{event.preventDefault();try{const answers=Object.fromEntries(new FormData(form));state=submitAssessment(lesson,state,answers,profile.assessment.passingPercent);retrying=false;save();render(true);}catch(error){err.textContent=error.message;const unanswered=[...form.querySelectorAll('fieldset')].find(f=>!f.querySelector('input:checked'));unanswered?.querySelector('input').focus();}});root.append(form);
 }
-function buildTranscript(){
- const root=$('#transcript-content');root.replaceChildren();lesson.nodes.forEach(node=>{
-  root.append(el('h3','',`${node.scene} · ${node.title}`),el('p','',text(node.narration)));
-  if(node.message)root.append(el('p','',`${node.message.from}. ${node.message.subject}. ${node.message.body}`));
-  (node.dialogue??[]).forEach(d=>root.append(el('p','',`${d.speaker}: ${d.text}`)));
-  (node.choices??[]).forEach(c=>root.append(el('p','',`Choice: ${text(c.label)} Feedback: ${text(c.feedback)}`)));
-  if(node.kind==='report'||node.kind==='recap')root.append(el('p','',text('Primary reporting: {{reporting.primary.label}}. {{reporting.primary.steps}} Fallback: {{reporting.fallback.label}}. {{reporting.fallback.steps}} Evidence: {{reporting.evidenceInstructions}}')));
- });
-}
 const fields=[['organisation','Company name'],['directory.label','Trusted directory name'],['directory.steps','How to open the directory'],['reporting.primary.label','Primary reporting route'],['reporting.primary.steps','Primary reporting steps'],['reporting.fallback.label','Fallback reporting route'],['reporting.fallback.steps','Fallback reporting steps'],['reporting.evidenceInstructions','Safe evidence submission instructions'],['sharing.label','Approved sharing workspace'],['sharing.steps','Sharing instructions'],['assessment.passingPercent','Passing percentage']];
 function getPath(obj,path){return path.split('.').reduce((v,key)=>v?.[key],obj);}
 function putPath(obj,path,value){const keys=path.split('.');let target=obj;keys.slice(0,-1).forEach(k=>{target[k]??={};target=target[k];});target[keys.at(-1)]=value;}
@@ -119,14 +110,15 @@ async function init(){
   const responses=await Promise.all([fetch('source/lesson.json'),fetch('company-profile.json')]);if(responses.some(r=>!r.ok))throw new Error('Lesson files could not load');
   const [content,defaults]=await Promise.all(responses.map(r=>r.json()));lesson=content;sourceProfileVersion=defaults.version;profile=selectReviewProfile(defaults,storage.get(PROFILE_KEY));
   try{const response=await fetch('media/voice/manifest.json');audioManifest=response.ok?await response.json():{clips:{}};}catch{audioManifest={clips:{}};}
-  setSession();buildTranscript();render();
+  setSession();render();
   $('#listen').addEventListener('click',()=>{if(['loading','playing','paused'].includes(narrator.state)){voiceEnabled=false;stopSpeech();}else{voiceEnabled=true;playCurrentScene();}});
   $('#pause-audio').addEventListener('click',()=>narrator.togglePause());
-  $('#restart').addEventListener('click',()=>{if(confirm('Restart this local review session? This will clear its practice and assessment attempts.')){stopSpeech();state=createSession(lesson,profile.version);retrying=false;notice='';save();render(true);}});
+  $('#restart').addEventListener('click',()=>{if(confirm('Restart this local review session? This will clear its practice and assessment attempts.')){stopSpeech();state=createSession(lesson,profile.version);retrying=false;notice='';save();render(true);if(voiceEnabled)playCurrentScene();}});
   $('#settings-open').addEventListener('click',openSettings);$('#settings-close').addEventListener('click',()=>$('#settings-dialog').close());
   $('#download-profile').addEventListener('click',()=>download('company-profile.json',profile));
-  $('#settings-form').addEventListener('submit',event=>{event.preventDefault();const values=new FormData(event.currentTarget);const updated=structuredClone(profile);fields.forEach(([path])=>putPath(updated,path,path==='assessment.passingPercent'?Number(values.get(path)):String(values.get(path)).trim()));updated.version=`draft-${Date.now()}`;updated.review={approved:false,owner:'',reviewDate:''};profile=updated;storage.set(PROFILE_KEY,{sourceVersion:sourceProfileVersion,profile});stopSpeech();setSession();save();retrying=false;buildTranscript();$('#settings-dialog').close();render(true);});
+  $('#settings-form').addEventListener('submit',event=>{event.preventDefault();const values=new FormData(event.currentTarget);const updated=structuredClone(profile);fields.forEach(([path])=>putPath(updated,path,path==='assessment.passingPercent'?Number(values.get(path)):String(values.get(path)).trim()));updated.version=`draft-${Date.now()}`;updated.review={approved:false,owner:'',reviewDate:''};profile=updated;storage.set(PROFILE_KEY,{sourceVersion:sourceProfileVersion,profile});stopSpeech();setSession();save();retrying=false;$('#settings-dialog').close();render(true);if(voiceEnabled)playCurrentScene();});
   window.addEventListener('pagehide',stopSpeech);
+  if(voiceEnabled&&state.nodeId!=='assessment')playCurrentScene();
  }catch(error){$('#lesson').replaceChildren(el('h1','','The review player could not load.'),el('p','',`${error.message}. Open this folder through a local web server.`));}
 }
 init();

@@ -15,14 +15,14 @@ export function createRecordedNarrator(makeAudio,onState=()=>{},onClip=()=>{}){
  function update(value){status=value;onState(value);}
  function release(){if(media){media.pause();media.currentTime=0;media.onended=null;media.onerror=null;media=null;}activeClip=null;onClip(null);}
  function stop(){generation++;playRequest++;release();queue=[];update('idle');}
- function fail(token){if(token!==generation)return;generation++;playRequest++;release();update('error');}
+ function fail(token,status='error'){if(token!==generation)return;generation++;playRequest++;release();update(status);}
  async function attemptPlay(audio,token){
   const request=++playRequest;update('loading');
   try{
    await audio.play();
    if(token!==generation||request!==playRequest||audio!==media)return;
    update('playing');
-  }catch{if(token===generation&&request===playRequest&&audio===media)fail(token);}
+  }catch(error){if(token===generation&&request===playRequest&&audio===media)fail(token,error?.name==='NotAllowedError'?'blocked':'error');}
  }
  async function start(index,token){
   if(token!==generation)return;
