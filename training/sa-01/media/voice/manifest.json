@@ -1,0 +1,221 @@
+{
+  "provider": "ElevenLabs",
+  "model": "eleven_v4",
+  "lessonId": "SA-01",
+  "contentVersion": "0.2.0",
+  "flowId": "FV44pqde3WC91NfIJfVn",
+  "cast": {
+    "narrator": {
+      "id": "umwdC76NumBsGtudno3p",
+      "name": "Claire - E-Learning & Corporate Training"
+    },
+    "Alex": {
+      "id": "UgBBYS2sOqTuMpoF3BR0",
+      "name": "Mark - Natural Conversations"
+    },
+    "Morgan": {
+      "id": "YyRJWuwyhKdMZRRnm464",
+      "name": "Katie - E-Learning & Podcast Host"
+    }
+  },
+  "clips": {
+    "S01.context.narrator": {
+      "id": "S01.context.narrator",
+      "nodeId": "S01.context",
+      "role": "narrator",
+      "text": "Alex's team is getting a customer agreement ready for review. They normally share sensitive documents through the approved workspace, with access limited to the people who need it. Then an email arrives that looks like it's from Alex's manager, Morgan.",
+      "path": "media/voice/S01.context.narrator.mp3",
+      "duration": 16.48,
+      "voiceId": "umwdC76NumBsGtudno3p",
+      "voiceName": "Claire - E-Learning & Corporate Training",
+      "generationId": "BnOIf9RzxJ5tDkp0ahjo"
+    },
+    "S01.message.narrator": {
+      "id": "S01.message.narrator",
+      "nodeId": "S01.message",
+      "role": "narrator",
+      "text": "It looks like a routine request from a busy manager. The deadline is tight, and the message asks Alex to send the file directly instead of using the usual sharing process.",
+      "path": "media/voice/S01.message.narrator.mp3",
+      "duration": 10.96,
+      "voiceId": "umwdC76NumBsGtudno3p",
+      "voiceName": "Claire - E-Learning & Corporate Training",
+      "generationId": "WPIZdc8vR2XLTa22q1MB"
+    },
+    "S02.decision.narrator": {
+      "id": "S02.decision.narrator",
+      "nodeId": "S02.decision",
+      "role": "narrator",
+      "text": "Before Alex replies or opens the attachment, take a moment. What would you do next?",
+      "path": "media/voice/S02.decision.narrator.mp3",
+      "duration": 6.4,
+      "voiceId": "umwdC76NumBsGtudno3p",
+      "voiceName": "Claire - E-Learning & Corporate Training",
+      "generationId": "filIYzhmNVvcDEM7T1yG"
+    },
+    "S02.debrief.narrator": {
+      "id": "S02.debrief.narrator",
+      "nodeId": "S02.debrief",
+      "role": "narrator",
+      "text": "A familiar name and a well-written message can make a request feel routine. Here, the reason to pause is the request to skip the usual sharing process. Let's check with Morgan through a separate, trusted route.",
+      "path": "media/voice/S02.debrief.narrator.mp3",
+      "duration": 14.08,
+      "voiceId": "umwdC76NumBsGtudno3p",
+      "voiceName": "Claire - E-Learning & Corporate Training",
+      "generationId": "KhLFwTFbj6cnQ8huHNED"
+    },
+    "S03.route.narrator": {
+      "id": "S03.route.narrator",
+      "nodeId": "S03.route",
+      "role": "narrator",
+      "text": "You want to check with Morgan. Where should you get the contact details?",
+      "path": "media/voice/S03.route.narrator.mp3",
+      "duration": 4.08,
+      "voiceId": "umwdC76NumBsGtudno3p",
+      "voiceName": "Claire - E-Learning & Corporate Training",
+      "generationId": "OCSdRP9yYijgS8sGgL6Y"
+    },
+    "S03.directory.narrator": {
+      "id": "S03.directory.narrator",
+      "nodeId": "S03.directory",
+      "role": "narrator",
+      "text": "Use Morgan's existing directory entry to get in touch. Keep the document where it is while you check.",
+      "path": "media/voice/S03.directory.narrator.mp3",
+      "duration": 6.24,
+      "voiceId": "umwdC76NumBsGtudno3p",
+      "voiceName": "Claire - E-Learning & Corporate Training",
+      "generationId": "ET7tM4d0CZTb5ByZGbk2"
+    },
+    "S03.call.narrator": {
+      "id": "S03.call.narrator",
+      "nodeId": "S03.call",
+      "role": "narrator",
+      "text": "Alex checks with Morgan before sending anything. The request wasn't theirs.",
+      "path": "media/voice/S03.call.narrator.mp3",
+      "duration": 5.28,
+      "voiceId": "umwdC76NumBsGtudno3p",
+      "voiceName": "Claire - E-Learning & Corporate Training",
+      "generationId": "BtJl68MTBGoIdcW6SbwU"
+    },
+    "S03.call.dialogue-0": {
+      "id": "S03.call.dialogue-0",
+      "nodeId": "S03.call",
+      "role": "Alex",
+      "text": "Hi Morgan. Did you just ask me to email you the agreement? The message says the workspace isn't loading.",
+      "path": "media/voice/S03.call.dialogue-0.mp3",
+      "duration": 6.24,
+      "voiceId": "UgBBYS2sOqTuMpoF3BR0",
+      "voiceName": "Mark - Natural Conversations",
+      "generationId": "ULE0JMWxgV4NKudyp6aZ"
+    },
+    "S03.call.dialogue-1": {
+      "id": "S03.call.dialogue-1",
+      "nodeId": "S03.call",
+      "role": "Morgan",
+      "text": "No, that wasn't me. Please don't send the file.",
+      "path": "media/voice/S03.call.dialogue-1.mp3",
+      "duration": 3.36,
+      "voiceId": "YyRJWuwyhKdMZRRnm464",
+      "voiceName": "Katie - E-Learning & Podcast Host",
+      "generationId": "PCgOf3cbcpltq7LZMHPd"
+    },
+    "S03.report.narrator": {
+      "id": "S03.report.narrator",
+      "nodeId": "S03.report",
+      "role": "narrator",
+      "text": "Morgan didn't send it. Use your company's reporting process so the team can look into it. You can report a concern even if you're not sure it's an attack. If the main route isn't available, use the fallback.",
+      "path": "media/voice/S03.report.narrator.mp3",
+      "duration": 12.96,
+      "voiceId": "umwdC76NumBsGtudno3p",
+      "voiceName": "Claire - E-Learning & Corporate Training",
+      "generationId": "X7k29H27QSD4WFmDQkK1"
+    },
+    "S03.confirm.narrator": {
+      "id": "S03.confirm.narrator",
+      "nodeId": "S03.confirm",
+      "role": "narrator",
+      "text": "You've practised reporting the message. In a real situation, follow any instructions from the response team. No document has been shared.",
+      "path": "media/voice/S03.confirm.narrator.mp3",
+      "duration": 9.04,
+      "voiceId": "umwdC76NumBsGtudno3p",
+      "voiceName": "Claire - E-Learning & Corporate Training",
+      "generationId": "QZ6QS5k0uiCpan4clm1W"
+    },
+    "S04.request.narrator": {
+      "id": "S04.request.narrator",
+      "nodeId": "S04.request",
+      "role": "narrator",
+      "text": "Later that morning, Morgan needs the agreement for another call. There's still a deadline. How would you handle this request?",
+      "path": "media/voice/S04.request.narrator.mp3",
+      "duration": 7.84,
+      "voiceId": "umwdC76NumBsGtudno3p",
+      "voiceName": "Claire - E-Learning & Corporate Training",
+      "generationId": "l7a4mzqYF4ebtucxj9gn"
+    },
+    "S04.route.narrator": {
+      "id": "S04.route.narrator",
+      "nodeId": "S04.route",
+      "role": "narrator",
+      "text": "This is still a sensitive document. Check with Morgan through a contact route you already trust before sharing it.",
+      "path": "media/voice/S04.route.narrator.mp3",
+      "duration": 7.2,
+      "voiceId": "umwdC76NumBsGtudno3p",
+      "voiceName": "Claire - E-Learning & Corporate Training",
+      "generationId": "6VQCch82F695CGsgpCXE"
+    },
+    "S04.call.narrator": {
+      "id": "S04.call.narrator",
+      "nodeId": "S04.call",
+      "role": "narrator",
+      "text": "Morgan confirms the request through the existing contact route.",
+      "path": "media/voice/S04.call.narrator.mp3",
+      "duration": 3.84,
+      "voiceId": "umwdC76NumBsGtudno3p",
+      "voiceName": "Claire - E-Learning & Corporate Training",
+      "generationId": "R9Tj6HwqwZfhKgXboj0A"
+    },
+    "S04.call.dialogue-0": {
+      "id": "S04.call.dialogue-0",
+      "nodeId": "S04.call",
+      "role": "Alex",
+      "text": "Hi Morgan. Just checking, did you ask for access to the agreement for the 11:30 call?",
+      "path": "media/voice/S04.call.dialogue-0.mp3",
+      "duration": 4.96,
+      "voiceId": "UgBBYS2sOqTuMpoF3BR0",
+      "voiceName": "Mark - Natural Conversations",
+      "generationId": "g9jh2KrdI7V6JJnXzeQx"
+    },
+    "S04.call.dialogue-1": {
+      "id": "S04.call.dialogue-1",
+      "nodeId": "S04.call",
+      "role": "Morgan",
+      "text": "Yes, that's from me. Thanks for checking. Please use the usual workspace and permissions.",
+      "path": "media/voice/S04.call.dialogue-1.mp3",
+      "duration": 5.76,
+      "voiceId": "YyRJWuwyhKdMZRRnm464",
+      "voiceName": "Katie - E-Learning & Podcast Host",
+      "generationId": "462RAWir2i5mjZJyRLpy"
+    },
+    "S04.share.narrator": {
+      "id": "S04.share.narrator",
+      "nodeId": "S04.share",
+      "role": "narrator",
+      "text": "Morgan has confirmed the request. You can carry on with the work, using the usual sharing process and checking who will have access.",
+      "path": "media/voice/S04.share.narrator.mp3",
+      "duration": 7.92,
+      "voiceId": "umwdC76NumBsGtudno3p",
+      "voiceName": "Claire - E-Learning & Corporate Training",
+      "generationId": "8VjSeuTvGfsT7VBl9xIf"
+    },
+    "S05.recap.narrator": {
+      "id": "S05.recap.narrator",
+      "nodeId": "S05.recap",
+      "role": "narrator",
+      "text": "When a request is unexpected or asks you to skip the usual process, pause. Check with the person using contact details you already trust, rather than details from the message. If something seems wrong, use the company reporting route. You don't need proof to raise a concern. SA-17, Report it early, even if you are unsure, walks through the reporting process.",
+      "path": "media/voice/S05.recap.narrator.mp3",
+      "duration": 27.04,
+      "voiceId": "umwdC76NumBsGtudno3p",
+      "voiceName": "Claire - E-Learning & Corporate Training",
+      "generationId": "T2azdIm4XzAJiInreUzR"
+    }
+  }
+}

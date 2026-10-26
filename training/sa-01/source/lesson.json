@@ -1,0 +1,428 @@
+{
+  "id": "SA-01",
+  "version": "0.2.0",
+  "variant": "document-email-01",
+  "title": "The message that cannot wait",
+  "status": "Draft for review",
+  "objectives": [
+    "Recognise urgency, unexpected sensitive requests, and a departure from the normal process.",
+    "Verify a sensitive request through an independently known channel before acting.",
+    "Report concerns through the configured company process without waiting for proof."
+  ],
+  "scenes": [
+    {
+      "id": "S01",
+      "title": "The request",
+      "seconds": 40
+    },
+    {
+      "id": "S02",
+      "title": "Pause before acting",
+      "seconds": 40
+    },
+    {
+      "id": "S03",
+      "title": "Verify and report",
+      "seconds": 80
+    },
+    {
+      "id": "S04",
+      "title": "When urgency is genuine",
+      "seconds": 50
+    },
+    {
+      "id": "S05",
+      "title": "Take it into your workday",
+      "seconds": 30
+    }
+  ],
+  "nodes": [
+    {
+      "id": "S01.context",
+      "scene": "S01",
+      "kind": "motion",
+      "seconds": 17,
+      "title": "A familiar name in your inbox",
+      "narration": "Alex's team is getting a customer agreement ready for review. They normally share sensitive documents through the approved workspace, with access limited to the people who need it. Then an email arrives that looks like it's from Alex's manager, Morgan.",
+      "visual": "Animated SVG of a work laptop and agreement in a shared workspace. A message from Morgan arrives, followed by a clock. Motion runs once; reduced-motion mode shows the complete illustration.",
+      "next": "S01.message"
+    },
+    {
+      "id": "S01.message",
+      "scene": "S01",
+      "kind": "email",
+      "seconds": 23,
+      "title": "Could you send me the file?",
+      "narration": "It looks like a routine request from a busy manager. The deadline is tight, and the message asks Alex to send the file directly instead of using the usual sharing process.",
+      "message": {
+        "from": "Morgan Chen · Manager",
+        "address": "morgan.chen@company.example",
+        "time": "9:42 AM",
+        "subject": "Agreement draft for the customer call",
+        "body": "Hi Alex,\n\nI'm heading into the customer call in ten minutes and need the latest draft of the agreement. The shared workspace isn't loading for me. Could you reply with the file attached?\n\nI've attached a short note with the details for the call. My contact details are in the note if you need me.\n\nThanks,\nMorgan",
+        "attachment": "Agreement review notes.pdf",
+        "attachmentSize": "86 KB",
+        "contact": "Contact details are included in the attached note."
+      },
+      "visual": "Enterprise-style email client with a blue app bar, folder navigation, message toolbar, sender details, recipient, timestamp, and PDF attachment. The preview is read-only; learner actions are below it.",
+      "next": "S02.decision"
+    },
+    {
+      "id": "S02.decision",
+      "scene": "S02",
+      "kind": "decision",
+      "seconds": 25,
+      "title": "What should Alex do next?",
+      "narration": "Before Alex replies or opens the attachment, take a moment. What would you do next?",
+      "visual": "Message remains visible behind three large action buttons. Do not reveal the preferred answer before the learner chooses.",
+      "choices": [
+        {
+          "id": "reply",
+          "label": "Reply and ask Morgan to confirm the request",
+          "correct": false,
+          "feedback": "A reply could go straight back to the person impersonating Morgan. Check through a separate contact route you already trust."
+        },
+        {
+          "id": "attachment",
+          "label": "Open the attached note to see what Morgan needs",
+          "correct": false,
+          "feedback": "The attachment comes with the same unverified request. Check with Morgan independently before opening it or sharing the file."
+        },
+        {
+          "id": "verify",
+          "label": "Check with Morgan using contact details you already trust",
+          "correct": true,
+          "feedback": "That's the right next step. Keep the document where it is while you check with Morgan through a separate, trusted route.",
+          "next": "S02.debrief"
+        }
+      ]
+    },
+    {
+      "id": "S02.debrief",
+      "scene": "S02",
+      "kind": "motion",
+      "seconds": 15,
+      "title": "Check the request, not just the name",
+      "narration": "A familiar name and a well-written message can make a request feel routine. Here, the reason to pause is the request to skip the usual sharing process. Let's check with Morgan through a separate, trusted route.",
+      "visual": "Animated SVG contrasts a familiar display name with an independently opened company directory. A connecting line draws toward the existing contact. No sender-authentication badge appears on the email.",
+      "next": "S03.route"
+    },
+    {
+      "id": "S03.route",
+      "scene": "S03",
+      "kind": "route",
+      "seconds": 20,
+      "title": "Where would you look?",
+      "narration": "You want to check with Morgan. Where should you get the contact details?",
+      "visual": "Provide two equally prominent options: the separately opened trusted directory, or the contact details in the suspicious message.",
+      "choices": [
+        {
+          "id": "message-contact",
+          "label": "Use the contact details in the email or attachment",
+          "correct": false,
+          "feedback": "Those details come from the same unverified source. They could lead back to the impersonator. Use an existing company contact instead."
+        },
+        {
+          "id": "trusted-directory",
+          "label": "Open {{directory.label}} separately",
+          "correct": true,
+          "feedback": "Yes. This gives you a contact route that doesn't depend on the email. {{directory.steps}}",
+          "next": "S03.directory"
+        }
+      ]
+    },
+    {
+      "id": "S03.directory",
+      "scene": "S03",
+      "kind": "directory",
+      "seconds": 15,
+      "title": "Find Morgan's existing contact",
+      "narration": "Use Morgan's existing directory entry to get in touch. Keep the document where it is while you check.",
+      "visual": "Directory entry for fictional manager Morgan Chen. No real phone number or external link; the call control is simulated.",
+      "contact": {
+        "name": "Morgan Chen",
+        "role": "Alex's manager",
+        "source": "Existing entry in {{directory.label}}"
+      },
+      "choices": [
+        {
+          "id": "call-manager",
+          "label": "Contact Morgan using this directory entry",
+          "correct": true,
+          "feedback": "You're checking the request through the existing company contact, separately from the email.",
+          "next": "S03.call"
+        }
+      ]
+    },
+    {
+      "id": "S03.call",
+      "scene": "S03",
+      "kind": "conversation",
+      "seconds": 15,
+      "title": "That wasn't Morgan",
+      "narration": "Alex checks with Morgan before sending anything. The request wasn't theirs.",
+      "dialogue": [
+        {
+          "speaker": "Alex",
+          "text": "Hi Morgan. Did you just ask me to email you the agreement? The message says the workspace isn't loading."
+        },
+        {
+          "speaker": "Morgan",
+          "text": "No, that wasn't me. Please don't send the file."
+        }
+      ],
+      "visual": "Animated SVG of two colleagues connected by a call, followed by readable dialogue cards. Decorative animation is hidden from assistive technology; the dialogue remains available as text and narration.",
+      "next": "S03.report"
+    },
+    {
+      "id": "S03.report",
+      "scene": "S03",
+      "kind": "report",
+      "seconds": 20,
+      "title": "Report the message",
+      "narration": "Morgan didn't send it. Use your company's reporting process so the team can look into it. You can report a concern even if you're not sure it's an attack. If the main route isn't available, use the fallback.",
+      "visual": "Simulated reporting panel with configured primary route, fallback and evidence instructions. Show only fictional, minimal report facts.",
+      "reportFacts": "I received a message asking me to email a customer agreement instead of using the shared workspace. I checked with Morgan through the company directory, and they said they hadn't sent it. I haven't shared the file.",
+      "choices": [
+        {
+          "id": "delete-only",
+          "label": "Delete it without reporting",
+          "correct": false,
+          "feedback": "Deleting it alone won't alert the team that handles these concerns. Use the company reporting process."
+        },
+        {
+          "id": "report-primary",
+          "label": "Report through {{reporting.primary.label}}",
+          "correct": true,
+          "feedback": "Include the relevant facts and follow the reporting instructions. {{reporting.evidenceInstructions}}",
+          "next": "S03.confirm"
+        },
+        {
+          "id": "report-fallback",
+          "label": "If the main route is unavailable, use {{reporting.fallback.label}}",
+          "correct": true,
+          "feedback": "Use the fallback when the main reporting route is unavailable. {{reporting.fallback.steps}}",
+          "next": "S03.confirm"
+        }
+      ]
+    },
+    {
+      "id": "S03.confirm",
+      "scene": "S03",
+      "kind": "motion",
+      "seconds": 10,
+      "title": "The concern is reported",
+      "narration": "You've practised reporting the message. In a real situation, follow any instructions from the response team. No document has been shared.",
+      "visual": "Animated SVG shows a factual report moving toward a reporting inbox, followed by a check mark. This confirms the practice action without promising a response time.",
+      "next": "S04.request"
+    },
+    {
+      "id": "S04.request",
+      "scene": "S04",
+      "kind": "email",
+      "seconds": 10,
+      "title": "Another request, another deadline",
+      "narration": "Later that morning, Morgan needs the agreement for another call. There's still a deadline. How would you handle this request?",
+      "message": {
+        "from": "Morgan Chen · Manager",
+        "address": "morgan.chen@company.example",
+        "time": "11:08 AM",
+        "subject": "Access to the agreement before 11:30",
+        "body": "Hi Alex,\n\nCould you give me access to the latest agreement draft in the shared workspace before our 11:30 customer call? The usual review permissions are fine.\n\nThanks,\nMorgan"
+      },
+      "visual": "Same familiar sender styling. Avoid making legitimacy depend on the visual design or a green authenticity badge.",
+      "next": "S04.route"
+    },
+    {
+      "id": "S04.route",
+      "scene": "S04",
+      "kind": "route",
+      "seconds": 10,
+      "title": "Make the same quick check",
+      "narration": "This is still a sensitive document. Check with Morgan through a contact route you already trust before sharing it.",
+      "visual": "Same contact-route choice pattern as the suspicious example.",
+      "choices": [
+        {
+          "id": "assume-genuine",
+          "label": "Go ahead because the request looks normal",
+          "correct": false,
+          "feedback": "A familiar-looking message still needs checking. Contact Morgan through a route you already trust before sharing the document."
+        },
+        {
+          "id": "reject-urgency",
+          "label": "Decline because the request is urgent",
+          "correct": false,
+          "feedback": "Some urgent requests are genuine. Check with Morgan so the work can continue safely."
+        },
+        {
+          "id": "verify-again",
+          "label": "Contact Morgan through {{directory.label}} again",
+          "correct": true,
+          "feedback": "Use the existing contact route, separately from the new message.",
+          "next": "S04.call"
+        }
+      ]
+    },
+    {
+      "id": "S04.call",
+      "scene": "S04",
+      "kind": "conversation",
+      "seconds": 15,
+      "title": "This one is from Morgan",
+      "narration": "Morgan confirms the request through the existing contact route.",
+      "dialogue": [
+        {
+          "speaker": "Alex",
+          "text": "Hi Morgan. Just checking, did you ask for access to the agreement for the 11:30 call?"
+        },
+        {
+          "speaker": "Morgan",
+          "text": "Yes, that's from me. Thanks for checking. Please use the usual workspace and permissions."
+        }
+      ],
+      "visual": "Reuse the verification conversation layout. No automatic document sharing.",
+      "next": "S04.share"
+    },
+    {
+      "id": "S04.share",
+      "scene": "S04",
+      "kind": "sharing",
+      "seconds": 15,
+      "title": "Carry on with the usual checks",
+      "narration": "Morgan has confirmed the request. You can carry on with the work, using the usual sharing process and checking who will have access.",
+      "visual": "Show verified request and an approved-workspace document card with recipient and permission review.",
+      "choices": [
+        {
+          "id": "email-copy",
+          "label": "Email a copy now that you've confirmed who asked",
+          "correct": false,
+          "feedback": "Use the approved sharing process even after confirming the request. Check the recipient and permissions before you share."
+        },
+        {
+          "id": "approved-sharing",
+          "label": "Use {{sharing.label}} and review access and permissions",
+          "correct": true,
+          "feedback": "{{sharing.steps}} You've confirmed the request and kept the usual sharing controls in place.",
+          "next": "S05.recap"
+        }
+      ]
+    },
+    {
+      "id": "S05.recap",
+      "scene": "S05",
+      "kind": "recap",
+      "seconds": 30,
+      "title": "Pause, check, and report",
+      "narration": "When a request is unexpected or asks you to skip the usual process, pause. Check with the person using contact details you already trust, rather than details from the message. If something seems wrong, use the company reporting route. You don't need proof to raise a concern. SA-17, Report it early, even if you are unsure, walks through the reporting process.",
+      "visual": "Three SVG action icons enter once: pause, check with the person, report the concern. Configured reporting and fallback instructions remain readable below.",
+      "next": "assessment"
+    }
+  ],
+  "assessment": [
+    {
+      "id": "Q01",
+      "objective": "Recognise process bypass and verify before acting",
+      "prompt": "An email looks like it's from your manager and asks you to send a sensitive document by email instead of using the usual sharing workspace. What should you do first?",
+      "options": [
+        {
+          "id": "reply",
+          "label": "Reply to the message and ask if it is genuine."
+        },
+        {
+          "id": "verify",
+          "label": "Check with your manager using contact details you already trust, before sharing anything."
+        },
+        {
+          "id": "send",
+          "label": "Send the document because the manager's name is correct."
+        }
+      ],
+      "correct": "verify",
+      "rationale": "A familiar name doesn't confirm who sent the message. Check the request independently before changing the usual sharing process."
+    },
+    {
+      "id": "Q02",
+      "objective": "Choose an independent contact route",
+      "prompt": "The email includes a phone number to call if you have questions. Which route would give you an independent check?",
+      "options": [
+        {
+          "id": "message-number",
+          "label": "The number in the message."
+        },
+        {
+          "id": "attachment-number",
+          "label": "A number in the attached instructions."
+        },
+        {
+          "id": "trusted-entry",
+          "label": "The existing entry in {{directory.label}}, opened separately from the message."
+        }
+      ],
+      "correct": "trusted-entry",
+      "rationale": "The number in the email or attachment comes from the same unverified source. Use an existing contact in your company directory."
+    },
+    {
+      "id": "Q03",
+      "objective": "Report concerns under uncertainty",
+      "prompt": "You're not sure whether an email is malicious. Do you need proof before reporting it?",
+      "options": [
+        {
+          "id": "prove-first",
+          "label": "Yes. Investigate until you can prove it."
+        },
+        {
+          "id": "report-concern",
+          "label": "No. Report the concern through {{reporting.primary.label}}, using the approved fallback if needed."
+        },
+        {
+          "id": "wait",
+          "label": "Wait until another employee confirms they received it too."
+        }
+      ],
+      "correct": "report-concern",
+      "rationale": "You can raise a concern without proving there's been an attack. Use the company process so the team can look into it."
+    },
+    {
+      "id": "Q04",
+      "objective": "Proceed safely after legitimate verification",
+      "prompt": "You've checked with your manager independently, and the urgent request is genuine. What should you do next?",
+      "options": [
+        {
+          "id": "approved-process",
+          "label": "Use {{sharing.label}} with the normal recipient, access, and permission checks."
+        },
+        {
+          "id": "any-route",
+          "label": "Use any convenient sharing method because the request is genuine."
+        },
+        {
+          "id": "block-all",
+          "label": "Refuse because urgent requests should never be acted on."
+        }
+      ],
+      "correct": "approved-process",
+      "rationale": "Go ahead using the approved sharing process, including the usual access and permission checks."
+    },
+    {
+      "id": "Q05",
+      "objective": "Apply independent verification to collaboration chat",
+      "prompt": "A colleague messages you in chat asking for a customer export through an unusual route. They say there's no time for a call. What should you do?",
+      "options": [
+        {
+          "id": "chat-trust",
+          "label": "Send it because an internal chat identity is enough."
+        },
+        {
+          "id": "deadline",
+          "label": "Send it now and verify after the deadline."
+        },
+        {
+          "id": "independent",
+          "label": "Check with the colleague independently before sharing, and report anything concerning through the company process."
+        }
+      ],
+      "correct": "independent",
+      "rationale": "Use the same approach in chat as in email. A familiar name and a deadline don't remove the need to check a sensitive request."
+    }
+  ]
+}

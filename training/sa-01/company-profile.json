@@ -1,0 +1,14 @@
+{
+  "version": "draft-unconfigured-01",
+  "organisation": "Catalogic",
+  "review": {"approved": false, "owner": "", "reviewDate": ""},
+  "directory": {"label": "", "steps": ""},
+  "reporting": {
+    "primary": {"label": "", "steps": ""},
+    "fallback": {"label": "", "steps": ""},
+    "evidenceInstructions": ""
+  },
+  "sharing": {"label": "", "steps": ""},
+  "assessment": {"passingPercent": 80},
+  "policyReferences": []
+}
